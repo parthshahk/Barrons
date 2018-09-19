@@ -14,7 +14,7 @@
         while ($row=mysqli_fetch_assoc($result)){
             
             $grammer['word'] = $row['Word'];
-            $grammer['definition'][] = $row['Definition'];
+            $grammer['definition'][] = str_replace("\t"," ",$row['Definition']);
         }
 
         echo json_encode($grammer);
