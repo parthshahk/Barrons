@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Word Inserter</title>
+    </head>
+    <body>
+
+        <input type="text" id="word" autofocus>
+        <br>
+        <p id="last-word"></p>
+
+        <script>
+            var input = document.getElementById("word");
+
+            input.addEventListener("keyup", function(event) {
+                if (event.keyCode === 13) {
+    
+                    var word = document.getElementById("word").value;
+
+                    if(word != ''){
+                     
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.open("GET", "insert.php?word="+word, true);
+                        xhttp.send();
+
+                        document.getElementById("word").value = '';
+
+                        document.getElementById("last-word").innerText = word;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
