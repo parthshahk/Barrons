@@ -6,9 +6,21 @@
 
     if($action == 'getRandom'){
 
-        
+        $index = mt_rand(1,903);
+        $grammer = [];
 
+        $result = mysqli_query($con, "SELECT words.word AS Word, definitions.definition AS Definition FROM words JOIN definitions ON words.word = definitions.word WHERE words.Position=$index");
+
+        while ($row=mysqli_fetch_assoc($result)){
+            
+            $grammer['word'] = $row['Word'];
+            $grammer['definition'][] = $row['Definition'];
+        }
+
+        echo json_encode($grammer);
 
         exit(0);
     }
+
+
 ?>
