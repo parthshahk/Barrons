@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2018 at 10:18 AM
+-- Generation Time: Sep 19, 2018 at 10:40 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -2171,9 +2171,7 @@ INSERT INTO `words` (`word`) VALUES
 ('clique'),
 ('coerce'),
 ('cogent'),
-('cognizant'),
 ('comely'),
-('commodious'),
 ('compassion'),
 ('compatible'),
 ('compensatory'),
@@ -2186,7 +2184,6 @@ INSERT INTO `words` (`word`) VALUES
 ('concomitant'),
 ('concur'),
 ('condescend'),
-('condolence'),
 ('condone'),
 ('conductive'),
 ('confidant'),
@@ -2403,7 +2400,6 @@ INSERT INTO `words` (`word`) VALUES
 ('gaunt'),
 ('genocide'),
 ('genre'),
-('germane'),
 ('gesticulate'),
 ('gist'),
 ('glean'),
@@ -2744,7 +2740,6 @@ INSERT INTO `words` (`word`) VALUES
 ('relegate'),
 ('remiss'),
 ('remote'),
-('renumeration'),
 ('repent'),
 ('repertoire'),
 ('replenish'),
@@ -2858,7 +2853,6 @@ INSERT INTO `words` (`word`) VALUES
 ('taint'),
 ('tangible'),
 ('tantalize'),
-('tantamount'),
 ('taut'),
 ('technology'),
 ('temerity'),

@@ -4,7 +4,8 @@
     include 'curl.php';
 
 
-    $result = mysqli_query($con, "SELECT * FROM words WHERE word LIKE 'z%'");
+    $result = mysqli_query($con, "SELECT * FROM words WHERE word = 'commodious'");
+    // $result = mysqli_query($con, "SELECT * FROM words WHERE word LIKE 'z%'");
 
     while ($row=mysqli_fetch_row($result)){
 
@@ -16,9 +17,13 @@
         if(isset($response[0]['defs'])){
         
             for($i=0; $i<sizeof($response[0]['defs']); $i++){
-        
 
                 $def = $response[0]['defs'][$i];
+        
+                $def = str_replace("`","-",$def);
+
+                $def = htmlspecialchars($def);
+
                 mysqli_query($con, "INSERT INTO definitions VALUES('$word', $i+1, '$def')");
             
             }
