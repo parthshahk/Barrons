@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Barron's 1100 Words</title>
+        <link rel="stylesheet" href="./css/materialize.min.css">
+        <link rel="stylesheet" href="./css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand" rel="stylesheet">
+        <style>
+            #start{
+                position: fixed;
+                top: 45%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            #stage{
+                margin-top: 120px;
+            }
+            #stage h4{
+                font-family: 'Pacifico';
+            }
+            #stage p{
+                margin-top: 50px;
+                text-align: justify;
+                font-size: 1.3rem;
+                font-family: 'Quicksand';
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app" class="container">
+
+            <div class="row hide" id="start">
+                <div class="col s12 center">
+                    <button class="btn-large waves-light waves-effect pink">Start</button>
+                    <p class="grey-text text-darken-3">Swipe Instructions</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col m4 offset-m4 center s10 offset-s1" id="stage">
+                    <h4 class="grey-text text-darken-3">Anomaly</h4>
+                    <p>n (astronomy) position of a planet as defined by its angular distance from its perihelion (as observed from the sun)</p>
+                </div>
+            </div>
+
+
+        </div>
+        <script src="./js/vue.js"></script>
+        <script src="./js/materialize.min.js"></script>
+        <script src="./js/axios.min.js"></script>
+        <script src="./js/hammer.min.js"></script>
+        <script src="./js/main.js"></script>
+        <script>
+        
+        </script>
+    </body>
+</html>
