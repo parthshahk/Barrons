@@ -83,13 +83,15 @@
 
                     fetchWord: function(){
 
+                        var cacheControl = Math.random();
+
                         var self = this;
 
                         this.word = this.nextWord;
                         this.defs = this.nextDefs;
                         this.activeDef = this.defs.length-1;
 
-                        axios.get('./api/words.php?action=getRandom')
+                        axios.get('./api/words.php?action=getRandom&nocache='+cacheControl)
                             .then(function(response){
 
                                 self.nextWord = response.data.word;
@@ -99,9 +101,12 @@
                     }
                 },
 
-                created: function(){
+                mounted: function(){
+
+                    var cacheControl = Math.random();
+
                     var self = this;
-                    axios.get('./api/words.php?action=getRandom')
+                    axios.get('./api/words.php?action=getRandom&nocache='+cacheControl)
                         .then(function(response){
 
                             self.nextWord = response.data.word;
