@@ -1,0 +1,37 @@
+#app{
+    height: 100%;
+    width: 100%
+}
+#start{
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#start h6{
+    margin-bottom: 25px;
+}
+#stage{
+    margin-top: 120px;
+}
+#stage h4{
+    font-family: 'Pacifico';
+}
+#stage p{
+    margin-top: 50px;
+    text-align: justify;
+    font-size: 1.3rem;
+    font-family: 'Quicksand';
+}
+#appBackground{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -99;
+}
+.fade-enter-active{
+    transition: opacity .4s;
+}
+.fade-enter{
+    opacity: 0;
+}

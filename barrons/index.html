@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101233231-2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-101233231-2');
+        </script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -8,39 +15,6 @@
         <link rel="stylesheet" href="./css/materialize.min.css">
         <link rel="stylesheet" href="./css/style.css">
         <link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand" rel="stylesheet">
-        <style>
-            #app{
-                height: 100%;
-                width: 100%
-            }
-            #start{
-                position: fixed;
-                top: 45%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-            #start h6{
-                margin-bottom: 25px;
-            }
-            #stage{
-                margin-top: 120px;
-            }
-            #stage h4{
-                font-family: 'Pacifico';
-            }
-            #stage p{
-                margin-top: 50px;
-                text-align: justify;
-                font-size: 1.3rem;
-                font-family: 'Quicksand';
-            }
-            #appBackground{
-                width: 100%;
-                height: 100%;
-                position: fixed;
-                z-index: -99;
-            }
-        </style>
     </head>
     <body>
         <div id="appBackground"></div>
@@ -58,8 +32,12 @@
 
             <div class="row" id="stage" v-if="view=='stage'">
                 <div class="col m4 offset-m4 center s10 offset-s1">
-                    <h4 class="grey-text text-darken-3" v-text="word"></h4>
-                    <p v-text="defs[activeDef]"></p>
+                    <transition name="fade">
+                        <h4 class="grey-text text-darken-3" :key="word" v-text="word"></h4>
+                    </transition>
+                    <transition name="fade">
+                        <p v-text="defs[activeDef]" :key="defs[activeDef]"></p>
+                    </transition>
                 </div>
             </div>
 
@@ -69,81 +47,5 @@
         <script src="./js/axios.min.js"></script>
         <script src="./js/hammer.min.js"></script>
         <script src="./js/main.js"></script>
-        <script>
-            var app = new Vue({
-                el: '#app',
-
-                data: {
-                    view: 'start',
-                    word: '',
-                    defs: [],
-                    activeDef: '',
-                    nextWord:'',
-                    nextDefs:[]
-                },
-
-                methods: {
-
-                    cycleDef: function(){
-
-                        var length  = this.defs.length;
-                        
-                        if(this.activeDef == length-1)
-                            this.activeDef = 0;
-                        else
-                            this.activeDef++;
-                        
-                    },
-
-                    fetchWord: function(){
-
-                        var cacheControl = Math.random();
-
-                        var self = this;
-
-                        this.word = this.nextWord;
-                        this.defs = this.nextDefs;
-                        this.activeDef = this.defs.length-1;
-
-                        axios.get('./api/words.php?action=getRandom&nocache='+cacheControl)
-                            .then(function(response){
-
-                                self.nextWord = response.data.word;
-                                self.nextDefs = response.data.definition;
-                                self.nextDefs.push("");
-                            })
-                    }
-                },
-
-                mounted: function(){
-
-                    var cacheControl = Math.random();
-
-                    var self = this;
-                    axios.get('./api/words.php?action=getRandom&nocache='+cacheControl)
-                        .then(function(response){
-
-                            self.nextWord = response.data.word;
-                            self.nextDefs = response.data.definition;
-                            self.nextDefs.push("");
-                            self.activeDef = self.nextDefs.length-1;
-                            self.fetchWord();
-                        })
-                }
-            });
-
-            var appWrapper = document.getElementById("appBackground");
-            var hammertime = new Hammer(appWrapper);
-
-            hammertime.on('swipeleft', function() {
-                app.fetchWord();
-            });
-
-            hammertime.on('swipeup', function() {
-                app.cycleDef();
-            });
-
-            hammertime.get('swipe').set({ velocity: 0.1, direction: Hammer.DIRECTION_ALL });
-        </script>
     </body>
 </html>
