@@ -32,19 +32,22 @@
     <body>
         <div id="app" class="container">
 
-            <div class="row hide" id="start">
+            <div class="row" id="start" v-if="view=='start'">
                 <div class="col s12 center">
-                    <button class="btn-large waves-light waves-effect pink">Start</button>
+                    <button class="btn-large waves-light waves-effect pink" @click="view='stage'">Start</button>
                     <p class="grey-text text-darken-3">Swipe Instructions</p>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col m4 offset-m4 center s10 offset-s1" id="stage">
-                    <h4 class="grey-text text-darken-3">Anomaly</h4>
-                    <p>n (astronomy) position of a planet as defined by its angular distance from its perihelion (as observed from the sun)</p>
+            <div class="row" id="stage" v-if="view=='stage'">
+                <div class="col m4 offset-m4 center s10 offset-s1">
+                    <h4 class="grey-text text-darken-3" v-text="word"></h4>
+                    <p v-text="defs[activeDef]"></p>
                 </div>
             </div>
+
+            <button @click="cycleDef">Cycle Def</button>
+            <button @click="fetchWord">Fetch Word</button>
 
         </div>
         <script src="./js/vue.js"></script>
@@ -53,7 +56,62 @@
         <script src="./js/hammer.min.js"></script>
         <script src="./js/main.js"></script>
         <script>
-        
+            new Vue({
+                el: '#app',
+
+                data: {
+                    view: 'start',
+                    word: '',
+                    defs: [],
+                    activeDef: '',
+                    nextWord:'',
+                    nextDefs:[]
+                },
+
+                methods: {
+
+                    cycleDef: function(){
+
+                        var length  = this.defs.length;
+                        
+                        if(this.activeDef == length-1)
+                            this.activeDef = 0;
+                        else
+                            this.activeDef++;
+                        
+                    },
+
+                    fetchWord: function(){
+
+                        var self = this;
+
+                        this.word = this.nextWord;
+                        this.defs = this.nextDefs;
+                        this.activeDef = this.defs.length-1;
+
+                        axios.get('./api/words.php?action=getRandom')
+                            .then(function(response){
+
+                                self.nextWord = response.data.word;
+                                self.nextDefs = response.data.definition;
+                                self.nextDefs.push("");
+                            })
+                    }
+                },
+
+                created: function(){
+                    var self = this;
+                    axios.get('./api/words.php?action=getRandom')
+                        .then(function(response){
+
+                            self.nextWord = response.data.word;
+                            self.nextDefs = response.data.definition;
+                            self.nextDefs.push("");
+                            self.activeDef = self.nextDefs.length-1;
+                            self.fetchWord();
+                        })
+                }
+            });
         </script>
     </body>
 </html>
