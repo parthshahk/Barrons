@@ -17,7 +17,6 @@
             $grammer['definition'][] = str_replace("\t"," ",$row['Definition']);
         }
 
-        sleep(2);
         echo json_encode($grammer);
 
         exit(0);
