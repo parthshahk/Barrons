@@ -7,7 +7,8 @@ var app = new Vue({
         defs: [],
         activeDef: '',
         nextWord:'',
-        nextDefs:[]
+        nextDefs:[],
+        counter:0
     },
 
     methods: {
@@ -32,6 +33,7 @@ var app = new Vue({
             this.word = this.nextWord;
             this.defs = this.nextDefs;
             this.activeDef = this.defs.length-1;
+            this.counter++;
 
             axios.get('./api/words.php?action=getRandom&nocache='+cacheControl)
                 .then(function(response){

@@ -31,6 +31,7 @@
             </div>
 
             <div class="row" id="stage" v-if="view=='stage'">
+                <div class="col s12 center light" v-text="counter"></div>
                 <div class="col m4 offset-m4 center s10 offset-s1">
                     <transition name="fade">
                         <h4 class="grey-text text-darken-3" :key="word" v-text="word"></h4>
