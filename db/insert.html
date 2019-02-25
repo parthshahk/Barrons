@@ -9,24 +9,29 @@
     <body>
 
         <input type="text" id="word" autofocus>
+        <input type="text" id="def" >
         <br>
         <p id="last-word"></p>
 
         <script>
-            var input = document.getElementById("word");
+            var input = document.getElementById("def");
 
             input.addEventListener("keyup", function(event) {
                 if (event.keyCode === 13) {
     
                     var word = document.getElementById("word").value;
+                    var def = document.getElementById("def").value;
 
-                    if(word != ''){
+                    if(word != '' && def != ''){
                      
                         var xhttp = new XMLHttpRequest();
-                        xhttp.open("GET", "insert.php?word="+word, true);
+                        xhttp.open("GET", "insert.php?word="+word+"&def="+def, true);
                         xhttp.send();
 
                         document.getElementById("word").value = '';
+                        document.getElementById("def").value = '';
+
+                        document.getElementById("word").focus();
 
                         document.getElementById("last-word").innerText = word;
                     }

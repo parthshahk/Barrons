@@ -2,7 +2,7 @@ var app = new Vue({
     el: '#app',
 
     data: {
-        view: 'start',
+        view: 'stage',
         word: '',
         defs: [],
         activeDef: '',

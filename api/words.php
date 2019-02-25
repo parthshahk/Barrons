@@ -6,10 +6,10 @@
 
     if($action == 'getRandom'){
 
-        $index = mt_rand(1,903);
+        $index = mt_rand(1,1003);
         $grammer = [];
 
-        $result = mysqli_query($con, "SELECT words.word AS Word, definitions.definition AS Definition FROM words JOIN definitions ON words.word = definitions.word WHERE words.Position=$index");
+        $result = mysqli_query($con, "SELECT * FROM words WHERE ID = $index");
 
         while ($row=mysqli_fetch_assoc($result)){
             
